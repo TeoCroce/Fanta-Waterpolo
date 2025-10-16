@@ -137,3 +137,32 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# ----------------------------------------
+# Aggiunte per il Backend (Python / FastAPI)
+# ----------------------------------------
+
+# Ambienti Virtuali Python
+# Assicurati che questo percorso corrisponda alla tua struttura: /NOME_CARTELLA_BACKEND/venv
+# Nel tuo caso, l'avevamo chiamata 'fantanuoto-backend'
+/fantanuoto-backend/venv/
+
+# Cartelle dell'ambiente virtuale (generiche)
+venv/
+env/
+.venv/
+
+# File compilati
+__pycache__/
+*.pyc
+*.o
+*.so
+
+# Database (se userai SQLite per lo sviluppo locale)
+*.db
+*.sqlite
+*.sqlite3
+
+# Dipendenze/Configurazioni (se usi strumenti specifici come Poetry/Pipenv)
+Pipfile.lock
+poetry.lock
