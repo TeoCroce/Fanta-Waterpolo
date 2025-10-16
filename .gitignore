@@ -145,7 +145,7 @@ vite.config.ts.timestamp-*
 # Ambienti Virtuali Python
 # Assicurati che questo percorso corrisponda alla tua struttura: /NOME_CARTELLA_BACKEND/venv
 # Nel tuo caso, l'avevamo chiamata 'fantanuoto-backend'
-/fantanuoto-backend/venv/
+/fantaWaterpoloBackend/venv/
 
 # Cartelle dell'ambiente virtuale (generiche)
 venv/

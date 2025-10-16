@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # SERVIZIO 1: IL DATABASE POSTGRESQL
+  db:
+    image: postgres:15-alpine # Immagine ufficiale e leggera di PostgreSQL
+    restart: always
+    environment:
+      # Variabili che PostgreSQL usa per l'inizializzazione del DB.
+      # Queste DEVONO CORRISPONDERE alla stringa di connessione nel tuo codice.
+      POSTGRES_USER: user 
+      POSTGRES_PASSWORD: password 
+      POSTGRES_DB: fanta_waterpolo_db
+    volumes:
+      # OPZIONALE: Rende i dati del database persistenti sulla tua macchina
+      - postgres_data:/var/lib/postgresql/data/
+    
+  # SERVIZIO 2: LA TUA APP FASTAPI
+  web:
+    # Istruisce Docker a costruire l'immagine usando il Dockerfile in questa cartella
+    build: 
+      context: ./fantaWaterpoloBackend 
+      dockerfile: Dockerfile
+    
+    # Variabili d'ambiente che l'app FastAPi userà per connettersi al DB
+    environment:
+      # IMPORTANTE: Usiamo il nome del servizio 'db' come hostname!
+      DATABASE_URL: postgresql://user:password@db:5432/fanta_waterpolo_db # <--- Usa 'db' come hostname
+    
+    # Mappa la porta 8000 del container alla porta 8000 del tuo computer host
+    ports:
+      - "8000:8000"
+      
+    # Assicura che l'app web non si avvii prima che il DB sia pronto
+    depends_on:
+      - db
+
+# Definizione del volume per la persistenza dei dati
+volumes:
+  postgres_data:
