@@ -1,0 +1,17 @@
+{
+    // Specifica il percorso dell'interprete Python (dovrebbe puntare al venv)
+    "python.defaultInterpreterPath": "venv/Scripts/python.exe",
+    
+    // Configurazione del Linter Pylance per trovare i moduli di progetto
+    "python.analysis.extraPaths": [
+        "./fantaWaterpoloBackend" // Aggiunge la cartella come percorso di ricerca
+    ],
+    
+    // Abilita la diagnostica degli errori di importazione
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingImports": "warning" // Lo imposta come warning, non come errore
+    },
+    
+    // Imposta la radice del progetto per Pylance
+    "python.analysis.stubPath": "./typings" // Percorso generico per stub di tipi
+}

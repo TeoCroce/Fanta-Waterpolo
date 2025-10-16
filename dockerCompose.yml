@@ -7,20 +7,25 @@ services:
     restart: always
     environment:
       # Variabili che PostgreSQL usa per l'inizializzazione del DB.
-      # Queste DEVONO CORRISPONDERE alla stringa di connessione nel tuo codice.
       POSTGRES_USER: user 
       POSTGRES_PASSWORD: password 
       POSTGRES_DB: fanta_waterpolo_db
     volumes:
-      # OPZIONALE: Rende i dati del database persistenti sulla tua macchina
+      # Rende i dati del database persistenti sulla tua macchina
       - postgres_data:/var/lib/postgresql/data/
     
-  # SERVIZIO 2: LA TUA APP FASTAPI
+  # SERVIZIO 2: LA TUA APP FASTAPI (web)
   web:
-    # Istruisce Docker a costruire l'immagine usando il Dockerfile in questa cartella
+    # Istruisce Docker a costruire l'immagine usando il Dockerfile nella sottocartella
     build: 
-      context: ./fantaWaterpoloBackend 
-      dockerfile: Dockerfile
+      context: . # Usa la cartella radice come contesto per la build
+      dockerfile: ./fantaWaterpoloBackend/Dockerfile # Specifica il percorso esatto del Dockerfile
+    
+    # MAPPATURA ESSENZIALE PER LO SVILUPPO:
+    # Mappa la cartella radice del tuo progetto (quella che contiene fantaWaterpoloBackend) 
+    # alla cartella /app del container, permettendo l'hot-reload del codice.
+    volumes:
+      - .:/app 
     
     # Variabili d'ambiente che l'app FastAPi userà per connettersi al DB
     environment:
